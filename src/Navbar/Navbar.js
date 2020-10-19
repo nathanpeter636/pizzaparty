@@ -20,6 +20,7 @@ const Logo = styled(Title)`
 font-size: 20px;
 color: white;
 text-shadow: 1px 2px 4px #260202;
+height: 60px;
 
 `
 
