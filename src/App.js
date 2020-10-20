@@ -32,7 +32,7 @@ function App() {
 
     <Banner/>
     <Menu/>
-    <div>Helllooooo</div>
+    
 
     </>
 
