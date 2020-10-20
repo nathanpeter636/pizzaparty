@@ -8,12 +8,12 @@ export const FoodGrid = styled.div`
 
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 20px
-
+gap: 20px;
+padding-bottom: 40px;
 
 `
 
-export const FoodLabel = styled.div`
+export const FoodLabel = styled(Title)`
 
 position: absolute;
 background-color: rgb(255 255 255 / 0.7);
@@ -22,7 +22,7 @@ padding: 5px;
 
 `
 
-export const Food = styled(Title)`
+export const Food = styled.div`
 
 height: 100px;
 
