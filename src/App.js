@@ -8,18 +8,8 @@ import { Banner } from "./Banner/Banner";
 
 import {Menu} from "./Menu/Menu";
 
-const GlobalStyle = createGlobalStyle`
-  body {
-   
-    font-family: 'Fira Sans', sans-serif;
+import {GlobalStyle} from "./Styles/GlobalStyle"
 
-    margin: 0;
-  }
-
-  h1, h2, h3 {
-    font-family: 'Ubuntu', sans-serif;
-  }
-`
 
 function App() {
   return (
