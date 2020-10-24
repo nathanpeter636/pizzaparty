@@ -3,7 +3,13 @@ import React from "react";
 import styled from "styled-components";
 import { foods } from "../Data/FoodData";
 
+import {pizzaRed} from "../Styles/colors"
+
+import {Title} from "../Styles/title"
+
 import { FoodLabel } from "../Menu/FoodGrid";
+
+import {formatPrice} from "../Data/FoodData"
 
 const Dialog = styled.div`
   width: 500px;
@@ -20,13 +26,29 @@ const Dialog = styled.div`
   flex-direction: column;
 `;
 
-const DialogContent = styled.div`
+export const DialogContent = styled.div`
   overflow: auto;
   min-height: 200px;
 `;
-const DialogFooter = styled.div`
-  box-shadow: 0px 2px 20px 0px grey;
+export const DialogFooter = styled.div`
+  box-shadow: 0px -2px 10px 0px grey;
   height: 60px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const ConfirmButton = styled.div`
+
+margin: 10px;
+color: white;
+height: 20px;
+padding: 10px;
+text-align: center;
+letter-spacing: 0.5px;
+width: 200px;
+cursor: pointer;
+background-color: ${pizzaRed};
+
 `;
 
 const DialogShadow = styled.div`
@@ -55,11 +77,24 @@ const DialogBannerName = styled(FoodLabel)`
   padding-left: 20px;
 `;
 
-export function FoodDialog({ openFood, setOpenFood, food }) {
+export function FoodDialog({ openFood, setOpenFood, setOrders , orders}) {
   function close() {
     setOpenFood();
 
     //no argument, removing dialog
+  }
+
+  if (!openFood) return null;
+
+  const order = {
+    ...openFood
+  }
+
+  function addToOrder() {
+
+    setOrders([...orders, order]);
+    close();
+    
   }
 
   return openFood ? (
@@ -70,7 +105,11 @@ export function FoodDialog({ openFood, setOpenFood, food }) {
           <DialogBannerName>{openFood.name}</DialogBannerName>
         </DialogBanner>
         <DialogContent></DialogContent>
-        <DialogFooter></DialogFooter>
+        <DialogFooter>
+            <ConfirmButton onClick={addToOrder}>
+                Add to Order: {formatPrice(openFood.price)}
+            </ConfirmButton>
+        </DialogFooter>
       </Dialog>
     </>
   ) : null;
