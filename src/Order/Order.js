@@ -6,6 +6,10 @@ import {Title} from "../Styles/title";
 
 import {formatPrice} from "../Data/FoodData";
 
+import {getPrice} from "../FoodDialog/FoodDialog";
+
+ 
+
 import {
   DialogContent,
   DialogFooter,
@@ -75,9 +79,9 @@ export function Order({ orders }) {
 
           <OrderItem>
 
-           <div>1</div> <div>{order.name}</div>
+        <div>{order.quantity}</div> <div>{order.name}</div>
 
-           <div>{formatPrice(order.price)}</div>
+           <div>{formatPrice(getPrice(order))}</div>
             
 
           </OrderItem>
