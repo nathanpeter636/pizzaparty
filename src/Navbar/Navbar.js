@@ -18,15 +18,22 @@ const NavbarStyled = styled.div`
 
 const Logo = styled(Title)`
 
-font-size: 20px;
+display: flex;
+align-items: center;
+font-size: 30px;
 color: white;
 text-shadow: 1px 2px 4px #260202;
 height: 60px;
 
-`
+`;
 
-//functional component so we can add hooks etc
+// 
+
+
+
 export function Navbar() {
+
+
 
   return (
 
