@@ -1,14 +1,18 @@
 import React from "react";
 
 import styled from "styled-components";
-import { foods } from "../Data/FoodData";
+// import { foods } from "../Data/FoodData";
 
 import { pizzaRed } from "../Styles/colors";
-import { Title } from "../Styles/title";
+// import { Title } from "../Styles/title";
 import { FoodLabel } from "../Menu/FoodGrid";
 import { formatPrice } from "../Data/FoodData";
 import { QuantityInput } from "../FoodDialog/QuantityInput";
-import {useQuantity} from "../Hooks/useQuantity";
+import { useQuantity } from "../Hooks/useQuantity";
+
+import { useToppings } from "../Hooks/useToppings";
+
+import { Toppings } from "./Toppings";
 
 const Dialog = styled.div`
   width: 500px;
@@ -29,6 +33,7 @@ export const DialogContent = styled.div`
   overflow: auto;
   min-height: 200px;
   padding: 0px 40px;
+  padding-bottom: 80px;
 `;
 export const DialogFooter = styled.div`
   box-shadow: 0px -2px 10px 0px grey;
@@ -75,14 +80,20 @@ const DialogBannerName = styled(FoodLabel)`
   padding-left: 20px;
 `;
 
+const pricePerTopping = 2.20;
+
 export function getPrice(order) {
-  return order.quantity * order.price;
+  return order.quantity * (order.price + order.toppings.filter( t => t.checked).length * pricePerTopping);
+}
+
+function hasToppings(food) {
+  return food.section === "Pizza";
 }
 
 function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
-  
   const quantity = useQuantity(openFood && openFood.quantity);
-  
+  const toppings = useToppings(openFood.toppings);
+
   function close() {
     setOpenFood();
 
@@ -90,11 +101,11 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
   }
 
   const order = {
-    ...openFood, 
-    quantity: quantity.value
+    ...openFood,
+    quantity: quantity.value,
+
+    toppings: toppings.toppings,
   };
-
-
 
   function addToOrder() {
     setOrders([...orders, order]);
@@ -109,7 +120,14 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
           <DialogBannerName>{openFood.name}</DialogBannerName>
         </DialogBanner>
         <DialogContent>
-          <QuantityInput quantity={quantity}/>
+          <QuantityInput quantity={quantity} />
+
+          {hasToppings(openFood) && (
+            <>
+              <h3>Would you like Toppings?</h3>
+              <Toppings {...toppings} />
+            </>
+          )}
         </DialogContent>
         <DialogFooter>
           <ConfirmButton onClick={addToOrder}>

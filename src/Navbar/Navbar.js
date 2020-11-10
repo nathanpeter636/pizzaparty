@@ -38,7 +38,7 @@ export function Navbar() {
   return (
 
     <NavbarStyled>
-      <Logo>PizzaParty 🍕 
+      <Logo>YourBusiness 🍕 
 
       </Logo>
       </NavbarStyled>
