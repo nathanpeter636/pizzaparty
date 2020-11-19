@@ -14,6 +14,10 @@ import { useToppings } from "../Hooks/useToppings";
 
 import { Toppings } from "./Toppings";
 
+import {useChoice} from "../Hooks/useChoice";
+
+import {Choices} from "./Choices"
+
 const Dialog = styled.div`
   width: 500px;
 
@@ -52,6 +56,15 @@ export const ConfirmButton = styled.div`
   width: 200px;
   cursor: pointer;
   background-color: ${pizzaRed};
+  
+
+  ${({disabled}) => disabled && `
+  
+  opacity: .5;
+  pointer-events: none;
+  background-color: gray;
+  `}
+
 `;
 
 const DialogShadow = styled.div`
@@ -68,14 +81,14 @@ const DialogBanner = styled.div`
   min-height: 200px;
   margin-bottom: 20px;
 
-  ${({ img }) => `background-image: url(${img})`};
+  ${({ img }) => (img ?`background-image: url(${img})`: `min-height: 75px;`)};
 
   background-position: center;
   background-size: cover;
 `;
 
 const DialogBannerName = styled(FoodLabel)`
-  top: 150px;
+ top: ${({img}) => (img ? '250px' : '20px')};
   font-size: 30px;
   padding-left: 20px;
 `;
@@ -93,6 +106,7 @@ function hasToppings(food) {
 function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
   const quantity = useQuantity(openFood && openFood.quantity);
   const toppings = useToppings(openFood.toppings);
+  const choiceRadio = useChoice(openFood.choice);
 
   function close() {
     setOpenFood();
@@ -105,6 +119,8 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
     quantity: quantity.value,
 
     toppings: toppings.toppings,
+
+    choice: choiceRadio.value
   };
 
   function addToOrder() {
@@ -128,9 +144,10 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
               <Toppings {...toppings} />
             </>
           )}
+          {openFood.choices && <Choices openFood={openFood}  choiceRadio={choiceRadio}/>}
         </DialogContent>
         <DialogFooter>
-          <ConfirmButton onClick={addToOrder}>
+          <ConfirmButton onClick={addToOrder} disabled={openFood.choices && !choiceRadio.value} >
             Add to Order: {formatPrice(getPrice(order))}
           </ConfirmButton>
         </DialogFooter>
