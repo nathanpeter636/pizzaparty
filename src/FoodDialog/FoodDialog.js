@@ -14,9 +14,9 @@ import { useToppings } from "../Hooks/useToppings";
 
 import { Toppings } from "./Toppings";
 
-import {useChoice} from "../Hooks/useChoice";
+import { useChoice } from "../Hooks/useChoice";
 
-import {Choices} from "./Choices"
+import { Choices } from "./Choices";
 
 const Dialog = styled.div`
   width: 500px;
@@ -56,15 +56,15 @@ export const ConfirmButton = styled.div`
   width: 200px;
   cursor: pointer;
   background-color: ${pizzaRed};
-  
 
-  ${({disabled}) => disabled && `
+  ${({ disabled }) =>
+    disabled &&
+    `
   
   opacity: .5;
   pointer-events: none;
   background-color: gray;
   `}
-
 `;
 
 const DialogShadow = styled.div`
@@ -81,22 +81,26 @@ const DialogBanner = styled.div`
   min-height: 200px;
   margin-bottom: 20px;
 
-  ${({ img }) => (img ?`background-image: url(${img})`: `min-height: 75px;`)};
+  ${({ img }) => (img ? `background-image: url(${img})` : `min-height: 75px;`)};
 
   background-position: center;
   background-size: cover;
 `;
 
 const DialogBannerName = styled(FoodLabel)`
- top: ${({img}) => (img ? '250px' : '20px')};
+  top: ${({ img }) => (img ? "250px" : "20px")};
   font-size: 30px;
   padding-left: 20px;
 `;
 
-const pricePerTopping = 2.20;
+const pricePerTopping = 2.2;
 
 export function getPrice(order) {
-  return order.quantity * (order.price + order.toppings.filter( t => t.checked).length * pricePerTopping);
+  return (
+    order.quantity *
+    (order.price +
+      order.toppings.filter((t) => t.checked).length * pricePerTopping)
+  );
 }
 
 function hasToppings(food) {
@@ -107,6 +111,8 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
   const quantity = useQuantity(openFood && openFood.quantity);
   const toppings = useToppings(openFood.toppings);
   const choiceRadio = useChoice(openFood.choice);
+
+  const isEditing = openFood.index > -1;
 
   function close() {
     setOpenFood();
@@ -120,13 +126,23 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
 
     toppings: toppings.toppings,
 
-    choice: choiceRadio.value
+    choice: choiceRadio.value,
   };
+
+  function editOrder() {
+    const newOrders = [...orders];
+    newOrders[openFood.index] = order;
+    setOrders(newOrders);
+
+    close()
+  }
 
   function addToOrder() {
     setOrders([...orders, order]);
     close();
   }
+
+ 
 
   return openFood ? (
     <>
@@ -144,11 +160,16 @@ function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
               <Toppings {...toppings} />
             </>
           )}
-          {openFood.choices && <Choices openFood={openFood}  choiceRadio={choiceRadio}/>}
+          {openFood.choices && (
+            <Choices openFood={openFood} choiceRadio={choiceRadio} />
+          )}
         </DialogContent>
         <DialogFooter>
-          <ConfirmButton onClick={addToOrder} disabled={openFood.choices && !choiceRadio.value} >
-            Add to Order: {formatPrice(getPrice(order))}
+          <ConfirmButton
+            onClick={isEditing ? editOrder : addToOrder}
+            disabled={openFood.choices && !choiceRadio.value}
+          >
+            {isEditing? 'Update order:' : 'Add to Order:'} {formatPrice(getPrice(order))}
           </ConfirmButton>
         </DialogFooter>
       </Dialog>
