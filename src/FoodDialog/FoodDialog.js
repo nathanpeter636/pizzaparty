@@ -40,6 +40,7 @@ export const DialogContent = styled.div`
   padding-bottom: 80px;
 `;
 export const DialogFooter = styled.div`
+  background-color: white;
   box-shadow: 0px -2px 10px 0px grey;
   height: 60px;
   display: flex;
