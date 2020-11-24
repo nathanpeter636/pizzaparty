@@ -49,9 +49,11 @@ export const DialogFooter = styled.div`
 
 export const ConfirmButton = styled.div`
   margin: 10px;
+  display: flex;
+    justify-content: center;
+    align-items: center;
   color: white;
   height: 20px;
-  padding: 10px;
   text-align: center;
   letter-spacing: 0.5px;
   width: 200px;

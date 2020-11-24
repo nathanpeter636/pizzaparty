@@ -49,7 +49,6 @@ box-shadow: 0px 0px 2px 0px grey;
     margin-top: 0px;
     margin-bottom: 5px;
     
-    
 }
 
 `

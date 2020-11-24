@@ -14,6 +14,10 @@ const NavbarStyled = styled.div`
   width: 100%;
   position: fixed;
   z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Logo = styled(Title)`
@@ -27,20 +31,52 @@ height: 60px;
 
 `;
 
-// 
+
+const UserStatus = styled.div`
+
+color: white;
+font-Size: 18px;
+margin-right: 30px;
+
+`
+
+const LoginButton = styled.span`
+
+cursor: pointer;
+
+`
 
 
-
-export function Navbar() {
+export function Navbar({login, loggedIn, logout }) {
 
 
 
   return (
 
+
+    
+
     <NavbarStyled>
       <Logo>YourBusiness 🍕 
 
       </Logo>
+    
+         <UserStatus>
+        {loggedIn !== "loading" ? (
+          <>
+            👤 {loggedIn ? ` ${loggedIn.displayName}` : ""}
+            {loggedIn ? (
+              <LoginButton onClick={logout}> Log out </LoginButton>
+            ) : (
+              <LoginButton onClick={login}> Log in / Sign up </LoginButton>
+            )}
+          </>
+        ) : (
+          "loading..."
+        )}
+      </UserStatus>
+
+
       </NavbarStyled>
 
     

@@ -1,0 +1,29 @@
+[debug] [2020-11-23T21:02:19.873Z] ----------------------------------------------------------------------
+[debug] [2020-11-23T21:02:19.875Z] Command:       /usr/local/bin/node /Users/send-it/.npm-global/bin/firebase init
+[debug] [2020-11-23T21:02:19.875Z] CLI Version:   8.16.2
+[debug] [2020-11-23T21:02:19.875Z] Platform:      darwin
+[debug] [2020-11-23T21:02:19.875Z] Node Version:  v12.16.0
+[debug] [2020-11-23T21:02:19.878Z] Time:          Tue Nov 24 2020 10:02:19 GMT+1300 (New Zealand Daylight Time)
+[debug] [2020-11-23T21:02:19.878Z] ----------------------------------------------------------------------
+[debug] [2020-11-23T21:02:19.879Z] 
+[debug] [2020-11-23T21:02:19.880Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2020-11-23T21:02:19.920Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-11-23T21:02:19.920Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Volumes/New seagate/Pizzaparty/pizzaparty-build
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+  * You are initializing in an existing Firebase project directory
+
+[debug] [2020-11-23T21:02:20.989Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2020-11-23T21:02:20.989Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
